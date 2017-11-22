@@ -1,2 +1,2 @@
-# raspberrypi-bluetooth
+# Raspberrypi + bluetooth
 setting tutorial for raspberry pi
