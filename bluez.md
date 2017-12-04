@@ -34,3 +34,59 @@ sudo make install
 - [bluez 라이브러리  설치 및 설정](http://blog.naver.com/lswcharming/30093416977)
 - [bluez 라이브러리 명령어](http://chiccoder.tistory.com/14)
 - [bluetoothctl 이용한 페어링 방법](http://webnautes.tistory.com/1137)
+
+------------------------------------------------
+
+### Login
+- In terminal
+```bash
+ssh pi@raspberrypi.local
+```
+- ID as pi, password as raspberry
+
+#### Device info
+```
+  bluetooth my-iPhone
+  74:1B:B2:59:FB:02
+
+  bluetooth raspberry pi zero w mac address
+  B8:27:EB:0C:CF:BD
+
+  bluetooth cs-macbook-pro
+  F4:0F:24:29:73:C0
+```
+
+### Command
+#### hcitool
+
+```bash
+- 주변 블루투스 장치 스캔
+pi@raspberrypi:~ $ hcitool scan
+```
+
+#### bluetoothctl
+- bluetoothctl 프로그램 실행
+
+```bash
+pi@raspberrypi:~ $ bluetoothctl
+
+- 라즈베리 파이 모듈 정보 확인
+pi@raspberrypi:~ $ show
+
+- 모듈 전원 on/off
+pi@raspberrypi:~ $ power on/off
+
+- 라즈베리 파이 장치를 다른 장치에서 검색가능 하게 할지/말지
+pi@raspberrypi:~ $ discoverable on/off
+
+- pairing 가능여부 on/off
+pi@raspberrypi:~ $ pairable on/off
+
+- 블루투스 agent on/off
+pi@raspberrypi:~ $ agent on/off
+
+- 연결하고자 하는 블루투스 장비의 정보 확인
+pi@raspberrypi:~ $ info [MAC-ADDRESS]
+
+
+```
