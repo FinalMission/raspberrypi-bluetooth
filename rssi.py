@@ -9,7 +9,7 @@ sys.argv[1] = INTERVAL
 if(sys.argv[1]):
     INTERVAL = int(sys.argv[1])
 
-print("Running {0} with interval {1}".format(sys.argv[0], sys.argv[1]))
+print("Running {0} with interval {1}".format(sys.argv[0], INTERVAL))
 
 while(1):
     subprocess.call('hcitool rssi {0}'.format(CS_MAC), shell=True)
