@@ -41,9 +41,48 @@ sudo hciconfig hci0 noscan
 
 ### Advertise interval 바꾸기
 - [참조](https://stackoverflow.com/questions/21124993/is-there-a-way-to-increase-ble-advertisement-frequency-in-bluez)
+
 ```
   sudo hciconfig hci0 up
   sudo hcitool -i hci0 cmd 0x08 0x0008 1e 02 01 1a 1a ff 4c 00 02 15 e2 c5 6d b5 df fb 48 d2 b0 60 d0 f5 a7 10 96 e0 00 00 00 00 c5 00 00 00 00 00 00 00 00 00 00 00 00 00
   sudo hcitool -i hci0 cmd 0x08 0x0006 A0 00 A0 00 03 00 00 00 00 00 00 00 00 07 00
   sudo hcitool -i hci0 cmd 0x08 0x000a 01
+```
+
+### Run beacon as background
+- /lib/systemd/system 디렉토리에 두개의 파일을 만든다. 각각 파일의 내용은 아래와 같다.
+
+```
+pi@raspberrypi ~ $ cat /lib/systemd/system/beacon.service
+[Unit]
+Description=Beacon service
+After=bluetooth.target
+
+[Service]
+Type=forking
+ExecStart=/home/pi/beacon.sh
+ExecReload=/home/pi/beacon.sh
+
+[Install]
+WantedBy=bluetooth.target
+
+pi@raspberrypi ~ $ cat /lib/systemd/system/beacon.target
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=Beacon
+Documentation=man:systemd.special(7)
+StopWhenUnneeded=yes
+
+pi@raspberrypi ~ $ sudo systemctl daemon-reload
+pi@raspberrypi ~ $ sudo systemctl enable beacon.service
+Synchronizing state for beacon.service with sysvinit using update-rc.d...
+Executing /usr/sbin/update-rc.d beacon defaults
+Executing /usr/sbin/update-rc.d beacon enable
+
 ```
