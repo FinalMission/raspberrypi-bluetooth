@@ -1,4 +1,5 @@
 - [원본](http://www.hardcopyworld.com/ngine/aduino/index.php/archives/1132)
+
 ## GAP
 >  GAP는 Generic Access Profile의 약자로 블루투스에서 게시(advertising)와 연결(connection)을 제어한다.
 GAP은 장치들이 맡을 수 있는 다양한 역할들에 대해 정의한다. 그 중 가장 핵심이 되는 컨셉은 Central 장치와 Peripheral 장치.

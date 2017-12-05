@@ -61,7 +61,7 @@ sudo make install
   F4:0F:24:29:73:C0
 
   bluetooth raspberry pi UUID
-  e2c56db5-dffb-48d2-b060-d0f5a71096e0
+  E2C56DB5DFFB48D2B060D0F5A71096E0
 ```
 
 ### Command
@@ -76,68 +76,68 @@ sudo make install
 - bluetoothctl 프로그램 실행
 
 ```bash
-pi@raspberrypi:~ $ bluetoothctl
+  pi@raspberrypi:~ $ bluetoothctl
 
-- 라즈베리 파이 모듈 정보 확인
-pi@raspberrypi:~ $ show
+  - 라즈베리 파이 모듈 정보 확인
+  pi@raspberrypi:~ $ show
 
-- 모듈 전원 on/off
-pi@raspberrypi:~ $ power on/off
+  - 모듈 전원 on/off
+  pi@raspberrypi:~ $ power on/off
 
-- 라즈베리 파이 장치를 다른 장치에서 검색가능 하게 할지/말지
-pi@raspberrypi:~ $ discoverable on/off
+  - 라즈베리 파이 장치를 다른 장치에서 검색가능 하게 할지/말지
+  pi@raspberrypi:~ $ discoverable on/off
 
-- pairing 가능여부 on/off
-pi@raspberrypi:~ $ pairable on/off
+  - pairing 가능여부 on/off
+  pi@raspberrypi:~ $ pairable on/off
 
-- 블루투스 agent on/off
-pi@raspberrypi:~ $ agent on/off
+  - 블루투스 agent on/off
+  pi@raspberrypi:~ $ agent on/off
 
-- 연결하고자 하는 블루투스 장비의 정보 확인
-pi@raspberrypi:~ $ info [MAC-ADDRESS]
+  - 연결하고자 하는 블루투스 장비의 정보 확인
+  pi@raspberrypi:~ $ info [MAC-ADDRESS]
 ```
 
 ```
-list                         List available controllers
-show [ctrl]                  Controller information
-select <ctrl>                Select default controller
-devices                      List available devices
-paired-devices               List paired devices
-power <on/off>               Set controller power
-pairable <on/off>            Set controller pairable mode
-discoverable <on/off>        Set controller discoverable mode
-agent <on/off/capability>    Enable/disable agent with given capability
-default-agent                Set agent as the default one
-advertise <on/off/type>      Enable/disable advertising with given type
-set-advertise-uuids [uuid1 uuid2 ...]                Set advertise uuids
-set-advertise-service [uuid][data=[xx xx ...]        Set advertise service data
-set-advertise-manufacturer [id][data=[xx xx ...]     Set advertise manufacturer data
-set-advertise-tx-power <on/off>                      Enable/disable TX power to be advertised
-set-scan-filter-uuids [uuid1 uuid2 ...]              Set scan filter uuids
-set-scan-filter-rssi [rssi]                          Set scan filter rssi, and clears pathloss
-set-scan-filter-pathloss [pathloss]                  Set scan filter pathloss, and clears rssi
-set-scan-filter-transport [transport]                Set scan filter transport
-set-scan-filter-clear          Clears discovery filter.
-scan <on/off>                  Scan for devices
-info [dev]                     Device information
-pair [dev]                     Pair with device
-trust [dev]                    Trust device
-untrust [dev]                  Untrust device
-block [dev]                    Block device
-unblock [dev]                  Unblock device
-remove <dev>                   Remove device
-connect <dev>                  Connect device
-disconnect [dev]               Disconnect device
-list-attributes [dev]          List attributes
-set-alias <alias>              Set device alias
-select-attribute <attribute>   Select attribute
-attribute-info [attribute]     Select attribute
-read                           Read attribute value
-write <data=[xx xx ...]>       Write attribute value
-notify <on/off>                Notify attribute value
-register-profile <UUID ...>    Register profile to connect
-unregister-profile             Unregister profile
-version                        Display version
-quit                           Quit program
+  list                         List available controllers
+  show [ctrl]                  Controller information
+  select <ctrl>                Select default controller
+  devices                      List available devices
+  paired-devices               List paired devices
+  power <on/off>               Set controller power
+  pairable <on/off>            Set controller pairable mode
+  discoverable <on/off>        Set controller discoverable mode
+  agent <on/off/capability>    Enable/disable agent with given capability
+  default-agent                Set agent as the default one
+  advertise <on/off/type>      Enable/disable advertising with given type
+  set-advertise-uuids [uuid1 uuid2 ...]                Set advertise uuids
+  set-advertise-service [uuid][data=[xx xx ...]        Set advertise service data
+  set-advertise-manufacturer [id][data=[xx xx ...]     Set advertise manufacturer data
+  set-advertise-tx-power <on/off>                      Enable/disable TX power to be advertised
+  set-scan-filter-uuids [uuid1 uuid2 ...]              Set scan filter uuids
+  set-scan-filter-rssi [rssi]                          Set scan filter rssi, and clears pathloss
+  set-scan-filter-pathloss [pathloss]                  Set scan filter pathloss, and clears rssi
+  set-scan-filter-transport [transport]                Set scan filter transport
+  set-scan-filter-clear          Clears discovery filter.
+  scan <on/off>                  Scan for devices
+  info [dev]                     Device information
+  pair [dev]                     Pair with device
+  trust [dev]                    Trust device
+  untrust [dev]                  Untrust device
+  block [dev]                    Block device
+  unblock [dev]                  Unblock device
+  remove <dev>                   Remove device
+  connect <dev>                  Connect device
+  disconnect [dev]               Disconnect device
+  list-attributes [dev]          List attributes
+  set-alias <alias>              Set device alias
+  select-attribute <attribute>   Select attribute
+  attribute-info [attribute]     Select attribute
+  read                           Read attribute value
+  write <data=[xx xx ...]>       Write attribute value
+  notify <on/off>                Notify attribute value
+  register-profile <UUID ...>    Register profile to connect
+  unregister-profile             Unregister profile
+  version                        Display version
+  quit                           Quit program
 
 ```
