@@ -21,6 +21,9 @@ export MAJOR="00 02"
 export MINOR="00 01"
 export POWER="C5 00"
 
+#set interval
+export MIN_INTERVAL="0A 00"
+export MAX_INTERVAL="0A 00"
 
 # initialize device
 sudo hciconfig $BLUETOOTH_DEVICE up
@@ -36,7 +39,7 @@ sudo hciconfig $BLUETOOTH_DEVICE leadv
 
 # advertise
 sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x0008 $IBEACONPROFIX $UUID $MAJOR $MINOR $POWER
-sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x0006 A0 00 A0 00 00 00 00 00 00 00 00 00 00 07 00
+sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x0006 $MIN_INTERVAL $MAX_INTERVAL 00 00 00 00 00 00 00 00 00 07 00
 sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x000a 01
 
 echo "complete"
