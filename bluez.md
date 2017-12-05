@@ -39,12 +39,17 @@ sudo make install
 
 ### Login
 - In terminal
-```bash
-ssh pi@raspberrypi.local
+
 ```
-- ID as pi, password as raspberry
+  ssh pi@raspberrypi.local
+```
+
+- ID as **pi**, password as **raspberry**
+
+- bluetoothctl의 명령어 목록을 보려면 ```help``` 를 친다.
 
 #### Device info
+
 ```
   bluetooth my-iPhone
   74:1B:B2:59:FB:02
@@ -59,9 +64,9 @@ ssh pi@raspberrypi.local
 ### Command
 #### hcitool
 
-```bash
-- 주변 블루투스 장치 스캔
-pi@raspberrypi:~ $ hcitool scan
+```
+  - 주변 블루투스 장치 스캔
+  pi@raspberrypi:~ $ hcitool scan
 ```
 
 #### bluetoothctl
