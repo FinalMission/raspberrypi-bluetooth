@@ -118,8 +118,8 @@ int main()
 					info = (le_advertising_info *)offset;
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
-					//printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
-					printf("%s - RSSI %d\n", addr, (signed int)info->data[info->length]);
+					printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
+					// printf("%s - RSSI %d\n", addr, (signed int)info->data[info->length]);
 					offset = info->data + info->length + 2;
 				}
 			}
