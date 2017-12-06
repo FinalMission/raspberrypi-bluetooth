@@ -121,7 +121,13 @@ int main()
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
 					printf("%s - RSSI %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
-					printf("info->data : %s\n", info->data);
+					printf("info->data : ");
+					int i=10;
+					int j=0;
+					while(i--){
+					  printf("%02X ", (signed int)info->data[j++]);
+					}
+					printf("\n");
 					offset = info->data + info->length + 2;
 				}
 			}
