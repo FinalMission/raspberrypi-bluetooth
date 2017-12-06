@@ -29,10 +29,10 @@ struct hci_request ble_hci_request(uint16_t ocf, int clen, void * status, void *
 void print_ble_info(le_advertising_info * info){
 	char addr[18];
 	ba2str(&(info->bdaddr), addr);
-	printf("========================================");
+	printf("========================================\n");
 	printf("event type : %d\n", (signed int)info->evt_type);
 	printf("ble device type : %d\n", (signed int)info->bdaddr_type);
-	printf("ble device addr : %d\n", addr);
+	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (signed int)info->length);
 	printf("ble data : %d\n", (signed int)info->data[0]);
 	// printf("info->data : ");
@@ -42,7 +42,6 @@ void print_ble_info(le_advertising_info * info){
 	//   printf("%02X ", (signed int)info->data[j++]);
 	// }
 	// printf("\n");
-	printf("========================================");
 }
 
 int main()
