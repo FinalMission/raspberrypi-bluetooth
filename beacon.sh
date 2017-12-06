@@ -51,7 +51,7 @@ export MAJOR="00 02"  # 2B
 export MINOR="00 01"  # 2B
 # ref : http://www.argenox.com/a-ble-advertising-primer/
 # 2’s complement of the calibrated TX power
-export TX_POWER="B5 00" # interpreted as 0x00C5
+export TX_POWER="C5 00" # interpreted as 0x00C5
 
 #interval constants
 export MIN_INTERVAL="0A 00"  # 10ms

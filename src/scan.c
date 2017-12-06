@@ -138,7 +138,8 @@ int main()
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
-					// printf("%s - RSSI %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
+					printf("[%s] RSSI1 : %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
+					printf("[%s] RSSI2 : %d\n", addr, (signed int)(~info->data[info->length]));
 					// printf("info->length : %d\n", (signed int)(info->length | 0xffffffff00));
 					print_ble_info(info);
 					offset = info->data + info->length + 2;

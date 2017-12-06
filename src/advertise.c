@@ -115,5 +115,6 @@ int main()
 
 	hci_close_dev(device);
 
+	printf(">");
 	return 0;
 }
