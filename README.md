@@ -2,7 +2,7 @@
 setting tutorial for raspberry pi
 
 - [bluez](./bluez.md)
-- [blyetooth](./bluetooth.md)
+- [bluetooth](./bluetooth.md)
 
 ## Reference list
 - [라즈베리 파이를 비콘으로 사용하기](https://arsviator.blogspot.kr/2016/05/using-raspberry-pi-as-beacon.html)
