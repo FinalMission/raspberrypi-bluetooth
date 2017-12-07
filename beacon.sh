@@ -13,7 +13,8 @@ export BLUETOOTH_DEVICE=hci0
 
 export OGF="0x08"
 export OCF="0x0008"
-export IBEACONPROFIX="1E 02 01 1A 1A FF 4C 00 02 15"
+export APPLE_COMPANY_ID="4C 00"
+export IBEACON_PREFIX="1E 02 01 1A 1A FF $APPLE_COMPANY_ID 02 15"
 
 #uuidgen  could gerenate uuid
 export UUID="4a 4e ce 60 7e b0 11 e4 b4 a9 08 00 20 0c 9a 66"
@@ -28,6 +29,7 @@ export MAX_INTERVAL="0B 00"  # 20ms
 export ENABLE_ADVERTISE="0x08 0x000a"
 export SET_ADVERTISE_PARAMS="0x08 0x0006"
 
+
 # initialize device
 sudo hciconfig $BLUETOOTH_DEVICE up
 # disable advertising
@@ -41,8 +43,8 @@ sudo hciconfig $BLUETOOTH_DEVICE pscan
 sudo hciconfig $BLUETOOTH_DEVICE leadv
 
 # advertise
-sudo hcitool -i $BLUETOOTH_DEVICE cmd $OGF $OCF $IBEACONPROFIX $UUID $MAJOR $MINOR $TX_POWER
-sudo hcitool -i $BLUETOOTH_DEVICE cmd $SET_ADVERTISE_PARAMS $MIN_INTERVAL $MAX_INTERVAL 00 00 00 00 00 00 00 00 00 07 00
+sudo hcitool -i $BLUETOOTH_DEVICE cmd $OGF $OCF $IBEACON_PREFIX $UUID $MAJOR $MINOR $TX_POWER
+sudo hcitool -i $BLUETOOTH_DEVICE cmd $SET_ADVERTISE_PARAMS $MIN_INTERVAL $MAX_INTERVAL 00 00 00 00 00 00 00 00 00 $TX_POWER
 sudo hcitool -i $BLUETOOTH_DEVICE cmd $ENABLE_ADVERTISE 01
 
 echo "COMPLETE"
