@@ -40,7 +40,7 @@ int main()
 
 	// Set BLE scan parameters.
 
-	  scan_params_cp;
+	le_set_scan_parameters_cp scan_params_cp;
 	memset(&scan_params_cp, 0, sizeof(scan_params_cp));
 	scan_params_cp.type 			= 0x00;
 	scan_params_cp.interval 		= htobs(0x0010);
