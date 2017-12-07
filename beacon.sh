@@ -17,7 +17,8 @@ export APPLE_COMPANY_ID="4C 00"
 export IBEACON_PREFIX="1E 02 01 1A 1A FF $APPLE_COMPANY_ID 02 15"
 
 #uuidgen  could gerenate uuid
-export UUID="4a 4e ce 60 7e b0 11 e4 b4 a9 08 00 20 0c 9a 66"
+# export UUID="4a 4e ce 60 7e b0 11 e4 b4 a9 08 00 20 0c 9a 66"
+export UUID="00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff"
 export MAJOR="00 02"
 export MINOR="00 01"
 export TX_POWER="C5 00"
