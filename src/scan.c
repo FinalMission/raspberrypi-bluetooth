@@ -40,7 +40,7 @@ int main()
 
 	// Set BLE scan parameters.
 
-	le_set_scan_parameters_cp scan_params_cp;
+	  scan_params_cp;
 	memset(&scan_params_cp, 0, sizeof(scan_params_cp));
 	scan_params_cp.type 			= 0x00;
 	scan_params_cp.interval 		= htobs(0x0010);
@@ -105,6 +105,7 @@ int main()
 	uint8_t buf[HCI_MAX_EVENT_SIZE];
 	evt_le_meta_event * meta_event;
 	le_advertising_info * info;
+
 	int len;
 
 	while ( 1 ) {
@@ -120,7 +121,7 @@ int main()
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
 					printf("%s - RSSI %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
-
+					printf("info->data : %s\n", info->data);
 					offset = info->data + info->length + 2;
 				}
 			}

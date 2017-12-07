@@ -19,11 +19,14 @@ export IBEACONPROFIX="1E 02 01 1A 1A FF 4C 00 02 15"
 export UUID="4a 4e ce 60 7e b0 11 e4 b4 a9 08 00 20 0c 9a 66"
 export MAJOR="00 02"
 export MINOR="00 01"
-export POWER="C5 00"
+export TX_POWER="C5 00"
 
-#set interval
-export MIN_INTERVAL="0A 00"
-export MAX_INTERVAL="0A 00"
+#interval constants
+export MIN_INTERVAL="0A 00"  # 10ms
+export MAX_INTERVAL="0B 00"  # 20ms
+
+export ENABLE_ADVERTISE="0x08 0x000a"
+export SET_ADVERTISE_PARAMS="0x08 0x0006"
 
 # initialize device
 sudo hciconfig $BLUETOOTH_DEVICE up
@@ -38,8 +41,8 @@ sudo hciconfig $BLUETOOTH_DEVICE pscan
 sudo hciconfig $BLUETOOTH_DEVICE leadv
 
 # advertise
-sudo hcitool -i $BLUETOOTH_DEVICE cmd $OGF $OCF $IBEACONPROFIX $UUID $MAJOR $MINOR $POWER
-sudo hcitool -i $BLUETOOTH_DEVICE cmd $OGF 0x0006 $MIN_INTERVAL $MAX_INTERVAL 00 00 00 00 00 00 00 00 00 07 00
-sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x000a 01
+sudo hcitool -i $BLUETOOTH_DEVICE cmd $OGF $OCF $IBEACONPROFIX $UUID $MAJOR $MINOR $TX_POWER
+sudo hcitool -i $BLUETOOTH_DEVICE cmd $SET_ADVERTISE_PARAMS $MIN_INTERVAL $MAX_INTERVAL 00 00 00 00 00 00 00 00 00 07 00
+sudo hcitool -i $BLUETOOTH_DEVICE cmd $ENABLE_ADVERTISE 01
 
 echo "COMPLETE"
