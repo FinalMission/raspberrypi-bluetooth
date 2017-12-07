@@ -31,7 +31,7 @@ export SET_ADVERTISE_PARAMS="0x08 0x0006"
 # initialize device
 sudo hciconfig $BLUETOOTH_DEVICE up
 # disable advertising
-sudo hciconfig $BLUETOOTH_DEVICE noleadv
+# sudo hciconfig $BLUETOOTH_DEVICE noleadv
 # stop the dongle looking for other Bluetooth devices
 sudo hciconfig $BLUETOOTH_DEVICE noscan
 
