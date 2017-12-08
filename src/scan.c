@@ -29,12 +29,13 @@ struct hci_request ble_hci_request(uint16_t ocf, int clen, void * status, void *
 void print_ble_info(le_advertising_info * info){
 	char addr[18];
 	ba2str(&(info->bdaddr), addr);
-	printf("========================================\n");
+
 	printf("event type : %d\n", (signed int)info->evt_type);
 	printf("ble device type : %d\n", (signed int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (signed int)info->length);
 	printf("ble data : %d\n", (signed int)info->data[0]);
+	printf("========================================\n");
 	// printf("info->data : ");
 	// int i=10;
 	// int j=0;
@@ -141,7 +142,7 @@ int main()
 					printf("[%s] RSSI: %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
 					//printf("[%s] RSSI2 : %d\n", addr, (signed int)(~info->data[info->length]));
 					// printf("info->length : %d\n", (signed int)(info->length | 0xffffffff00));
-					//print_ble_info(info);
+					print_ble_info(info);
 					offset = info->data + info->length + 2;
 				}
 			}
