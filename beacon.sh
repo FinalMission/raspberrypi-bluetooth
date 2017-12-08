@@ -54,8 +54,8 @@ export MINOR="00 01"  # 2B
 export TX_POWER="C5 00" # interpreted as 0x00C5
 
 #interval constants
-export MIN_INTERVAL="0A 00"  # 10ms
-export MAX_INTERVAL="0B 00"  # 20ms
+export MIN_INTERVAL="0A 00"  # 10ms (= 0x000A == 10 * 0.625 = 6.25ms)
+export MAX_INTERVAL="0B 00"  # 20ms (= 0x000B == 11 * 0.625 = 6.875ms)
 
 export ENABLE_ADVERTISE="0x08 0x000a"
 export SET_ADVERTISE_PARAMS="0x08 0x0006"
