@@ -36,10 +36,10 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble length : %d\n", (signed int)info->length);
 
 	printf("info->data : ");
-	int i=(int)info->length;
-	int j=0;
-	while(i--){
-	  printf("%02X ", (signed int)info->data[j++]);
+	int len=(int)info->length;
+	int index=0;
+	while(len--){
+	  printf("%02X ", (signed int)info->data[index]);
 	}
 
 	printf("========================================\n");
