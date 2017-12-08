@@ -33,7 +33,7 @@ void print_ble_info(le_advertising_info * info){
 	printf("event type : %d\n", (int)info->evt_type);
 	printf("ble device type : %d\n", (int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
-	printf("ble length : %d\n", (int)info->length + 1);
+	printf("ble length : %d\n", (int)info->length);
 
 	printf("info->data : ");
 	int len=(int)info->length;
