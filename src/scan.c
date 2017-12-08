@@ -42,7 +42,7 @@ void print_ble_info(le_advertising_info * info){
 	int index=0;
 	while(len--){
 	  printf("[%02d] : %02X ", (index+1), (signed int)info->data[index++]);
-		if(len %10 == 0) printf("\n");
+		if(index %10 == 0) printf("\n");
 	}
 
 	printf("\n========================================\n");
