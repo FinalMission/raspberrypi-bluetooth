@@ -41,7 +41,7 @@ void print_ble_info(le_advertising_info * info){
 	int len=(int)info->length + 1;
 	int index=0;
 	while(len--){
-	  printf("[0x%02d] : 0x%02X ", (index+1), (signed int)info->data[index++]);
+	  printf("[%02d] : 0x%02X ", (index+1), (signed int)info->data[index++]);
 		if(index %10 == 0) printf("\n");
 	}
 
