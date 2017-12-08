@@ -36,7 +36,7 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble length : %d\n", (signed int)info->length);
 
 	printf("info->data : ");
-	int len=(int)info->length;
+	int len=(int)info->length + 1;
 	int index=0;
 	while(len--){
 	  printf("%02X ", (signed int)info->data[index]);
