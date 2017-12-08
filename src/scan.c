@@ -34,15 +34,15 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble device type : %d\n", (signed int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (signed int)info->length);
-	printf("ble data : %d\n", (signed int)info->data[0]);
+
+	printf("info->data : ");
+	int i=(int)info->length;
+	int j=0;
+	while(i--){
+	  printf("%02X ", (signed int)info->data[j++]);
+	}
+
 	printf("========================================\n");
-	// printf("info->data : ");
-	// int i=10;
-	// int j=0;
-	// while(i--){
-	//   printf("%02X ", (signed int)info->data[j++]);
-	// }
-	// printf("\n");
 }
 
 int main()
