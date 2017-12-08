@@ -42,7 +42,7 @@ void print_ble_info(le_advertising_info * info){
 	  printf("%02X ", (signed int)info->data[index]);
 	}
 
-	printf("========================================\n");
+	printf("\n========================================\n");
 }
 
 int main()
