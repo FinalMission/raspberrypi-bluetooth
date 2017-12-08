@@ -34,7 +34,7 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble device type : %d\n", (int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (int)info->length);
-
+	printf("ble tx power : %d\n", (int)(info->data[info-length] | 0xffffff00));
 	printf("info->data : ");
 	int len=(int)info->length;
 	int index=0;
@@ -139,7 +139,7 @@ int main()
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
-					printf("[%s] RSSI: %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
+					printf("[%s] RSSI: %d\n", addr, (signed int)(info->data[info->length] | 0xffffff00));
 					// printf("info->length : %d\n", (signed int)(info->length | 0xffffffff00));
 					print_ble_info(info);
 					offset = info->data + info->length + 2;
