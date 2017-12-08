@@ -39,7 +39,7 @@ void print_ble_info(le_advertising_info * info){
 	int len=(int)info->length + 1;
 	int index=0;
 	while(len--){
-	  printf("%02X ", (signed int)info->data[index]);
+	  printf("%02X ", (signed int)info->data[index++]);
 	}
 
 	printf("\n========================================\n");
@@ -140,7 +140,6 @@ int main()
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
 					printf("[%s] RSSI: %d\n", addr, (signed int)(info->data[info->length] | 0xffffffff00));
-					//printf("[%s] RSSI2 : %d\n", addr, (signed int)(~info->data[info->length]));
 					// printf("info->length : %d\n", (signed int)(info->length | 0xffffffff00));
 					print_ble_info(info);
 					offset = info->data + info->length + 2;
