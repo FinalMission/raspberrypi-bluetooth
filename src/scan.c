@@ -34,8 +34,8 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble device type : %d\n", (int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (int)info->length + 1);
-	printf("ble tx power : %d(0x%02X)\n", (int)(info->data[info->length] | 0xffffff00), (int)info->data[info->length]);
-
+	printf("ble tx power : 0x%02X\n", (int)info->data[info->length]);
+	printf("ble rssi %d\n", (int)(info->data[info->length] | 0xffffff00))
 	printf("info->data : ");
 	int len=(int)info->length + 1;
 	int index=0;
