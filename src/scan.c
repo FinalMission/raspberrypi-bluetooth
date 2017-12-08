@@ -30,13 +30,13 @@ void print_ble_info(le_advertising_info * info){
 	char addr[18];
 	ba2str(&(info->bdaddr), addr);
 
-	printf("event type : %d\n", (signed int)info->evt_type);
-	printf("ble device type : %d\n", (signed int)info->bdaddr_type);
+	printf("event type : %d\n", (int)info->evt_type);
+	printf("ble device type : %d\n", (int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
-	printf("ble length : %d\n", (signed int)info->length);
+	printf("ble length : %d\n", (int)info->length + 1);
 
 	printf("info->data : ");
-	int len=(int)info->length + 1;
+	int len=(int)info->length;
 	int index=0;
 	while(len--){
 	  printf("%02X ", (signed int)info->data[index++]);
