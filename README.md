@@ -10,3 +10,13 @@ setting tutorial for raspberry pi
 - [블루투스 이해하기](http://www.hardcopyworld.com/ngine/aduino/index.php/archives/1132)
 - [RSSI 값 출력해보기](http://dhoehrmfo.tistory.com/category/%EA%B0%9C%EB%B0%9C/Raspberry-pi)
 - [인텔 에디슨 소스코드](https://github.com/glock45/intel-edison-playground)
+
+
+## Device list
+#### Pi Zero W
+- Mac addr : **[B8:27:EB:0C:CF:BD]**
+- IP(local) : **[192.168.0.4]**
+
+#### Pi 1
+- Mac addr : **[00:1A:7D:DA:71:13]**
+- IP(local) : **[192.168.0.5]**
