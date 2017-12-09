@@ -12,6 +12,11 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/hci.h>
 #include <bluetooth/hci_lib.h>
+//#include <sys/type.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include "shm.h"
+#include <errno.h>
 
 struct hci_request ble_hci_request(uint16_t ocf, int clen, void * status, void * cparam)
 {
@@ -25,8 +30,31 @@ struct hci_request ble_hci_request(uint16_t ocf, int clen, void * status, void *
 	rq.rlen = 1;
 	return rq;
 }
+void validation(le_advertising_info * info, Packet * packet)
+{
+	printf(" RAW | Packet \n");
+	printf("%04X | %04X\n", *(unsigned short *)(info->data + 25), packet->major);
+	printf("%02X | %02X\n", (char)info->data[29], packet->tx_power);
+	printf("%02X | %02X\n", (char)info->data[30], packet->rssi);
+}
+
+void inject_packet(le_advertising_info * info, Packet * packet)
+{
+	int i, j;
+	for(i = 0; i < 9; i++) packet->prefix[i] = (char)info->data[i];
+	for(j = 0; j < 2; i+=8, j++) packet->uuid[j] = *((unsigned long long *)(info->data + i));
+	packet->major = *((unsigned short *)(info->data + i));
+	i+=2;
+	packet->minor = *((unsigned short *)(info->data + i));
+	i+=2;
+	packet->tx_power = info->data[i++];
+	packet->rssi = info->data[i];
+
+//	validation(info, packet);
+}
 
 void print_ble_info(le_advertising_info * info){
+	if((int)info->length != 30) return;
 	char addr[18];
 	ba2str(&(info->bdaddr), addr);
 
@@ -34,10 +62,10 @@ void print_ble_info(le_advertising_info * info){
 	printf("ble device type : %d\n", (int)info->bdaddr_type);
 	printf("ble device addr : %s\n", addr);
 	printf("ble length : %d\n", (int)info->length + 1);
-	printf("ble tx power : 0x%02X\n", (int)info->data[info->length]);
+	printf("ble tx power : 0x%02X\n", (int)info->data[info->length -1]);
 	printf("ble rssi %d\n", (int)(info->data[info->length] | 0xffffff00));
 
-	printf("info->data : ====================\n");
+	 printf("info->data : ====================\n");
 	int len=(int)info->length + 1;
 	int index=0;
 	while(len--){
@@ -47,7 +75,23 @@ void print_ble_info(le_advertising_info * info){
 
 	printf("\n========================================\n");
 }
-
+void checkUUID(le_advertising_info * info, Packet * packetshm)
+{
+	Packet * packet;
+	inject_packet(info, packet);
+	if(packet->uuid == "1")
+	{	
+		inject_packet(info, packetshm);
+	}
+	else if(packet->uuid == "2")
+	{
+		inject_packet(info, packetshm + sizeof(Packet));
+	}
+	else if(packet->uuid == "3")
+	{
+		inject_packet(info, packetshm + sizeof(Packet) * 2);
+	}
+}
 int main()
 {
 	int ret, status;
@@ -127,8 +171,26 @@ int main()
 	uint8_t buf[HCI_MAX_EVENT_SIZE];
 	evt_le_meta_event * meta_event;
 	le_advertising_info * info;
-
+//	Packet packet;
+	Packet * packetshm;
 	int len;
+	int offset = sizeof(Packet);
+	//============ attach shared memory ===============
+	int id_shm;
+	id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777|IPC_CREAT);
+	if(id_shm == ERROR) 
+	{
+		printf("error: %s (%d)\n", strerror(errno), __LINE__);
+		return EXIT_FAILURE;
+	}
+	packetshm = shmat(id_shm, (void *)0, 0);
+	if(packetshm == (Packet *)ERROR)
+	{
+		printf("error: %s (%d)\n", strerror(errno), __LINE__);
+                return EXIT_FAILURE;
+	}
+        //============ attach shared memory ===============
+
 
 	while ( 1 ) {
 		len = read(device, buf, sizeof(buf));
@@ -142,16 +204,25 @@ int main()
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
 					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
-					printf("[%s] RSSI: %d\n", addr, (int)(info->data[info->length] | 0xffffff00));
-					print_ble_info(info);
+					//printf("[%s] RSSI: %d\n", addr, (int)(info->data[info->length] | 0xffffff00));
+					//print_ble_info(info);
+					checkUUID(info, packetshm);
 					offset = info->data + info->length + 2;
 				}
 			}
 		}
 	}
+        //============ detach shared memory ===============
+	ret = shmdt(packetshm);
+        if(ret == ERROR)
+        {
+                printf("error: %s (%d)\n", strerror(errno), __LINE__);
+                return EXIT_FAILURE;
+        }
+	//============ detach shared memory ===============
+
 
 	// Disable scanning.
-
 	memset(&scan_cp, 0, sizeof(scan_cp));
 	scan_cp.enable = 0x00;	// Disable flag.
 
