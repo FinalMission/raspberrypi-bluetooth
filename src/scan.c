@@ -68,21 +68,21 @@ void print_ble_info(le_advertising_info * info){
 	printf("\n========================================\n");
 }
 
-void checkMACaddr(char * addr, char rssi, Packet * packetshm)
+void checkMACaddr(char * addr, int rssi, Packet * packetshm)
 {
 	if(!strcmp(addr, PI0W1))
 	{
-		printf("[PI0 W 1] %d\n", (int)rssi | 0xffffff00);
+		printf("[PI0 W 1] %d\n", rssi);
 		inject_packet(addr, rssi, &packetshm[0]);
 	}
 	else if(!strcmp(addr, PI0W2))
 	{
-		printf("[PI0 W 2] %d\n", (int)rssi | 0xffffff00);
+		printf("[PI0 W 2] %d\n", rssi);
 		inject_packet(addr, rssi, &packetshm[1]);
 	}
-	else if(strcmp(addr, PI0W3))
+	else if(!strcmp(addr, PI0W3))
 	{
-		printf("[PI0 W 2] %d\n", (int)rssi | 0xffffff00);
+		printf("[PI0 W 3] %d\n", rssi);
 		inject_packet(addr, rssi, &packetshm[2]);
 	}else{
 		//printf("[MAC-%s] %d\n", addr, (int)rssi | 0xffffffff00);
@@ -134,6 +134,7 @@ int main()
 		perror("Failed to set event mask.");
 		return 0;
 	}
+
 
 	// Enable scanning.
 
@@ -200,8 +201,9 @@ int main()
 					info = (le_advertising_info *)offset;
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
-					checkMACaddr(addr, (char)(info->data[info->length]), packetshm);
+					checkMACaddr(addr, (int)(info->data[info->length] | 0xffffff00), packetshm);
 					offset = info->data + info->length + 2;
+//					print_ble_info(info);
 				}
 			}
 		}
