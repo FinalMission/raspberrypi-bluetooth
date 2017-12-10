@@ -23,7 +23,12 @@ setting tutorial for raspberry pi
 - USB IP : **[raspberrypi.local / 192.168.2.39]**
 - UUID : **77 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
 
-#### Pi 1 - case o
+#### Pi Zero W - 3
+- BLE Mac addr : **[B8:27:EB:49:E4:48]**
+- USB IP : **[raspberrypi.local / 192.168.2.45]**
+- UUID : **FF 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
+
+#### Pi 1 - case o(deprecated)
 - BLE Mac addr : **[00:1A:7D:DA:71:13]**
 - IP(local) : **[192.168.0.5]**
 - UUID : **FF 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
