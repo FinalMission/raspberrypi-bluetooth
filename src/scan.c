@@ -38,21 +38,6 @@ void validation(le_advertising_info * info, Packet * packet)
 	printf("%02X | %02X\n", (char)info->data[30], packet->rssi);
 }
 
-void inject_packet(le_advertising_info * info, Packet * packet)
-{
-	int i, j;
-	for(i = 0; i < 9; i++) packet->prefix[i] = (char)info->data[i];
-	for(j = 0; j < 4; i+=4, j++) packet->uuid[j] = *((unsigned long long *)(info->data + i));
-	packet->major = *((unsigned short *)(info->data + i));
-	i+=2;
-	packet->minor = *((unsigned short *)(info->data + i));
-	i+=2;
-	packet->tx_power = info->data[i++];
-	packet->rssi = info->data[i];
-
-//	validation(info, packet);
-}
-
 void inject_packet(char * addr, char rssi, Packet * packet)
 {
 	int i, j;
