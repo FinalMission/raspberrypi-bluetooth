@@ -13,20 +13,27 @@ setting tutorial for raspberry pi
 
 
 ## Device list
-#### Pi Zero W
+#### Pi Zero W - 1
 - BLE Mac addr : **[B8:27:EB:0C:CF:BD]**
-- IP(local) : **[192.168.0.4]**
-- UUID : **FF 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
+- IP(local) : **[raspberrypi.local / 192.168.2.40]**
+- UUID : **99 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
+
+#### Pi Zero W - 2
+- BLE Mac addr : **[B8:27:EB:4F:CF:45]**
+- USB IP : **[raspberrypi.local / 192.168.2.39]**
+- UUID : **77 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
 
 #### Pi 1 - case o
 - BLE Mac addr : **[00:1A:7D:DA:71:13]**
 - IP(local) : **[192.168.0.5]**
 - UUID : **FF 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
 
+============ 안씀 ============
 #### Pi 1 - case x
 - BLE Mac addr : **[00:1A:7D:DA:71:13]**
 - IP(local) : **[192.168.0.6]**
 - UUID : **00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff**
+============ 안씀 ============
 
 #### Pi 3 - display
 - BLE Mac addr : **[B8:27:EB:B5:7C:32]**
