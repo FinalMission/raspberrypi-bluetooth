@@ -4,6 +4,7 @@
 //
 
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #include <curses.h>
 #include <unistd.h>
@@ -12,7 +13,6 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/hci.h>
 #include <bluetooth/hci_lib.h>
-//#include <sys/type.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include "shm.h"
@@ -53,6 +53,13 @@ void inject_packet(le_advertising_info * info, Packet * packet)
 //	validation(info, packet);
 }
 
+void inject_packet(char * addr, char rssi, Packet * packet)
+{
+	int i, j;
+	for(i = 0; i < 18; i++) packet->addr[i] = addr[i];
+	packet->rssi = rssi;
+}
+
 void print_ble_info(le_advertising_info * info){
 	if((int)info->length != 30) return;
 	char addr[18];
@@ -75,31 +82,26 @@ void print_ble_info(le_advertising_info * info){
 
 	printf("\n========================================\n");
 }
-void checkUUID(le_advertising_info * info,  Packet * packetshm)
+
+void checkMACaddr(char * addr, char rssi, Packet * packetshm)
 {
-	Packet p;
-        if((int)info->length != 30) return;
-//	print_ble_info(info);
-//	printf("address is .... %#.8x \n", packetshm);
-	inject_packet(info, &p);
-//	printf("%#xllu %#xllu\n", p.uuid[0], p.uuid[1]);
-	//if(P->uuid[0] == (unsigned long long)0x0000 && P->uuid[1] == (unsigned long long)0x1234 ) 
-	if(p.uuid[0] == PI0_SEG4)
-	{	
-		printf("[PI0      W] %d\n", (int)p.rssi | 0xffffff00);
-		inject_packet(info, &packetshm[0]);
-	}	
-	else if(p.uuid[0] == PI1_O_SEG4)
+	if(strcmp(addr, PI0W1))
 	{
-		printf("[PI1 CASE O] %d\n", (int)p.rssi | 0xffffff00);
-		inject_packet(info, &packetshm[1]);
-	}	
-	else if(p.uuid[0] == PI1_X_SEG4)
+		printf("[PI0 W 1] %d\n", (int)rssi | 0xffffff00);
+		inject_packet(addr, rssi, &packetshm[0]);
+	}
+	else if(strcmp(addr, PI0W2))
 	{
-		printf("[PI1 CASE X] %d\n", (int)p.rssi | 0xffffff00);
-		inject_packet(info, &packetshm[2]);
+		printf("[PI0 W 2] %d\n", (int)rssi | 0xffffff00);
+		inject_packet(addr, rssi, &packetshm[1]);
+	}
+	else if(strcmp(addr, PI1))
+	{
+		printf("[PI1    ] %d\n", (int)rssi | 0xffffff00);
+		inject_packet(addr, rssi, &packetshm[2]);
 	}
 }
+
 int main()
 {
 	int ret, status;
@@ -186,7 +188,7 @@ int main()
 	//============ attach shared memory ===============
 	int id_shm;
 	id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777 | IPC_CREAT);
-	if(id_shm == ERROR) 
+	if(id_shm == ERROR)
 	{
 		printf("error: %s (%d)\n", strerror(errno), __LINE__);
 		return EXIT_FAILURE;
@@ -211,10 +213,7 @@ int main()
 					info = (le_advertising_info *)offset;
 					char addr[18];
 					ba2str(&(info->bdaddr), addr);
-					// printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
-					//printf("[%s] RSSI: %d\n", addr, (int)(info->data[info->length] | 0xffffff00));
-					//print_ble_info(info);
-					checkUUID(info, packetshm);
+					checkMACaddr(addr, (char)(info->data[info->length]) packetshm);
 					offset = info->data + info->length + 2;
 				}
 			}

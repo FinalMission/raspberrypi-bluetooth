@@ -10,17 +10,19 @@
 #define PI0_SEG4 0x33221199
 #define PI1_O_SEG4 0x332211ff
 #define PI1_X_SEG4 0x33221100
-
-typedef struct 
+#define PI0W1 "B8:27:EB:0C:CF:BD"
+#define PI0W2 "B8:27:EB:4F:CF:45"
+#define PI1 "00:1A:7D:DA:71:13"
+typedef struct
 {
-  char prefix[9];
-  unsigned int uuid[4];
-  unsigned short major;
-  unsigned short minor;
-  char tx_power;
+  char addr[18];
   char rssi;
+  // char prefix[9];
+  // unsigned int uuid[4];
+  // unsigned short major;
+  // unsigned short minor;
+  // char tx_power;
 }Packet;
 
 
 #define P_OFFSET sizeof(Packet)
-
