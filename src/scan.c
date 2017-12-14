@@ -30,13 +30,13 @@ struct hci_request ble_hci_request(uint16_t ocf, int clen, void * status, void *
 	rq.rlen = 1;
 	return rq;
 }
-void validation(le_advertising_info * info, Packet * packet)
-{
-	printf(" RAW | Packet \n");
-	printf("%04X | %04X\n", *(unsigned short *)(info->data + 25), packet->major);
-	printf("%02X | %02X\n", (char)info->data[29], packet->tx_power);
-	printf("%02X | %02X\n", (char)info->data[30], packet->rssi);
-}
+// void validation(le_advertising_info * info, Packet * packet)
+// {
+// 	printf(" RAW | Packet \n");
+// 	printf("%04X | %04X\n", *(unsigned short *)(info->data + 25), packet->major);
+// 	printf("%02X | %02X\n", (char)info->data[29], packet->tx_power);
+// 	printf("%02X | %02X\n", (char)info->data[30], packet->rssi);
+// }
 
 void inject_packet(char * addr, char rssi, Packet * packet)
 {
