@@ -80,9 +80,9 @@ void checkMACaddr(char * addr, char rssi, Packet * packetshm)
 		printf("[PI0 W 2] %d\n", (int)rssi | 0xffffff00);
 		inject_packet(addr, rssi, &packetshm[1]);
 	}
-	else if(strcmp(addr, PI1))
+	else if(strcmp(addr, PI0W3))
 	{
-		printf("[PI1    ] %d\n", (int)rssi | 0xffffff00);
+		printf("[PI0 W 2] %d\n", (int)rssi | 0xffffff00);
 		inject_packet(addr, rssi, &packetshm[2]);
 	}
 }
